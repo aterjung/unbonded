@@ -1,0 +1,14 @@
+.enhanced_btn {
+    border: 1px solid grey;
+    border-radius: 3px;
+    color: grey;
+    padding: 5px;
+    box-shadow: 1px 1px 3px 0px rgba(10, 10, 10, 0.15), 0px 1px 0px 0px #dde2e4 inset;
+    background: linear-gradient(to bottom, #FFF 0%, #F5FAFC 100%) repeat scroll 0% 0% transparent;
+    margin-right:5px;
+}
+
+.enhanced_btn:hover {
+    text-decoration: none;
+    color: grey;
+}
