@@ -11,11 +11,10 @@ function filter(max) {
         f = parseInt(txt);
         if (f > max) {
             parent = elements[i].parentNode;
-			$(elements[i]).parent().hide();
-      }
-        ;
-    }
-    ;
+
+            $(elements[i]).parent().hide();
+        };
+    };
 }
 
 function sort_a()
@@ -100,30 +99,28 @@ function resetFilter() {
     for (i = 0; i < c; i++) {
         element = elements[i].parentNode.childNodes[21].childNodes[1].childNodes[1];
         $(elements[i]).parent().show();
-    }
-    ;
+    };
 }
 
-function scrollToFilter(){
+function scrollToFilter() {
     $('html, body').animate({
         scrollTop: $("#enhancer_filter").offset().top
     }, 1000);
 }
 
 // React to control messages from main.js
-self.port.on("resetFilter", function() {
+self.port.on("resetFilter", function () {
     resetFilter();
     scrollToFilter();
 });
 
-self.port.on("updateFilter", function(add) {
+self.port.on("updateFilter", function (add) {
     filter(add);
     scrollToFilter();
 });
 
-self.port.on("setFilterButton", function(id) {
-    $('#'+id).click();
-//    $('#'+id).button("refresh");
+self.port.on("setFilterButton", function (id) {
+    $('#' + id).click();
 });
 
 // Insert our markup to page
@@ -131,6 +128,7 @@ $('head').append('<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/f
 
 $("<div id=\"enhancer_filter\" class=\"nice_group_border enhanced_filter\"><a id=\"enhancer_filter_button_reset\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-recycle fa-lg\"></i></a></div>").insertBefore(".loansales_table");
 $('<div id="enhancer_filter" class="nice_group_border enhanced_filter">' +
+    '<span>Auf/Abschläge <i class=\"fa fa-filter fa-lg\"></i></span>'+
     '<div id="surchargeFilter">' +
     '<input type="radio" id="surchargeFilterNo" name="surchargeFilterRadio">' +
     '<label for="surchargeFilterNo">aus</label>' +
@@ -144,84 +142,14 @@ $('<div id="enhancer_filter" class="nice_group_border enhanced_filter">' +
 
 $("<a id=\"enhancer_sort_a_button\" class=\"enhanced_btn\" href=\"#\"> &darr; Aufgeld </a>").insertAfter("#enhancer_filter_button_reset");
 // React on button events
-$("input[name=surchargeFilterRadio]").change(function(e) {
+$("input[name=surchargeFilterRadio]").change(function (e) {
     console.log(this.id);
     self.port.emit("buttonChange", this.id);
 });
 
 $("<a id=\"enhancer_filter_button_m5\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> A &le; -5% </a>").insertAfter("#enhancer_sort_a_button");
 // Apply jQueryUI effects
-$( "#surchargeFilter" ).buttonset();
+$("#surchargeFilter").buttonset();
 
-$("<a id=\"enhancer_filter_button0\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> A &le; 0% </a>").insertAfter("#enhancer_filter_button_m5");
+// Page modification finished, send event back to main.js to update filter status
 self.port.emit("loadFinished");
-
-$("<a id=\"enhancer_filter_button_p5\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> A &le; 5% </a>").insertAfter("#enhancer_filter_button0");
-
-$("<a id=\"enhancer_filter_button_x\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> A &le; x% </a>").insertAfter("#enhancer_filter_button_p5");
-
-$("<a id=\"enhancer_sort_r_button\" class=\"enhanced_btn\" href=\"#\"> <span class=\"green\"> &uarr; Rendite </a>").insertAfter("#enhancer_filter_button_x");
-
-$("<a id=\"enhancer_filter_button_r20\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> <span class=\"green\">R &ge; 20% </span></a>").insertAfter("#enhancer_sort_r_button");
-
-$("<a id=\"enhancer_filter_button_r30\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> <span class=\"green\">R &ge; 30% </span></a>").insertAfter("#enhancer_filter_button_r20");
-
-$("<a id=\"enhancer_filter_button_rx\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> <span class=\"green\">R &ge; x% </span></a>").insertAfter("#enhancer_filter_button_r30");
-
-
-
-
-
-
-$("#enhancer_filter_button_reset").click(function () {
-    resetFilter();
-    scrollToFilter();
-});
-
-$("#enhancer_sort_a_button").click(function () {
-	sort_a();
-    scrollToFilter();
-});
-
-$("#enhancer_filter_button0").click(function () {
-    filter(0);
-	sort_r();
-    scrollToFilter();
-});
-$("#enhancer_filter_button_m5").click(function () {
-    filter(-5);
-	sort_r();
-    scrollToFilter();
-});
-$("#enhancer_filter_button_p5").click(function () {
-    filter(5);
-	sort_r();
-    scrollToFilter();
-});
-$("#enhancer_filter_button_x").click(function () {
-	x = prompt('Maximaler Aufschlag in Prozent:','');
-    filter(x);
-	sort_r();
-    scrollToFilter();
-});
-$("#enhancer_filter_button_r20").click(function () {
-    r_filter(20);
-	sort_r();
-    scrollToFilter();
-});
-$("#enhancer_filter_button_r30").click(function () {
-    r_filter(30);
-	sort_r();
-    scrollToFilter();
-});
-$("#enhancer_filter_button_rx").click(function () {
-	x = prompt('Minimale Rendite in Prozent:','');
-    r_filter(x);
-	sort_r();
-    scrollToFilter();
-});	
-
-$("#enhancer_sort_r_button").click(function () {
-	sort_r();
-    scrollToFilter();
-});
