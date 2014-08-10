@@ -45,29 +45,47 @@ function scrollToFilter(){
     }, 1000);
 }
 
-$('head').append('<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">');
-
-$("<div id=\"enhancer_filter\" class=\"nice_group_border enhanced_filter\"><a id=\"enhancer_filter_button_reset\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-recycle fa-lg\"></i></a></div>").insertBefore(".loansales_table");
-
-$("<a id=\"enhancer_filter_button_m5\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> &lt; -5% </a>").insertAfter("#enhancer_filter_button_reset");
-
-$("<a id=\"enhancer_filter_button0\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> &lt; 0% </a>").insertAfter("#enhancer_filter_button_m5");
-
-$("<a id=\"enhancer_filter_button_p5\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> &lt; 5% </a>").insertAfter("#enhancer_filter_button0");
-
-$("#enhancer_filter_button_reset").click(function () {
+// React to control messages from main.js
+self.port.on("resetFilter", function() {
     resetFilter();
     scrollToFilter();
 });
-$("#enhancer_filter_button0").click(function () {
-    filter(0);
+
+self.port.on("updateFilter", function(add) {
+    filter(add);
     scrollToFilter();
 });
-$("#enhancer_filter_button_m5").click(function () {
-    filter(-5);
-    scrollToFilter();
+
+self.port.on("setFilterButton", function(id) {
+    $('#'+id).click();
+//    $('#'+id).button("refresh");
 });
-$("#enhancer_filter_button_p5").click(function () {
-    filter(5);
-    scrollToFilter();
+
+// Insert our markup to page
+$('head').append('<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">');
+
+$('<div id="enhancer_filter" class="nice_group_border enhanced_filter">' +
+    '<div id="surchargeFilter">' +
+    '<input type="radio" id="surchargeFilterNo" name="surchargeFilterRadio">' +
+    '<label for="surchargeFilterNo">aus</label>' +
+    '<input type="radio" id="surchargeFilterM5" name="surchargeFilterRadio">' +
+    '<label for="surchargeFilterM5">-5 %</label>' +
+    '<input type="radio" id="surchargeFilter0" name="surchargeFilterRadio">' +
+    '<label for="surchargeFilter0">0 %</label>' +
+    '<input type="radio" id="surchargeFilterP5" name="surchargeFilterRadio">' +
+    '<label for="surchargeFilterP5">5 %</label>' +
+    '</div></div>').insertBefore(".loansales_table");
+
+// React on button events
+$("input[name=surchargeFilterRadio]").change(function(e) {
+    console.log(this.id);
+    self.port.emit("buttonChange", this.id);
 });
+
+// Apply jQueryUI effects
+$( "#surchargeFilter" ).buttonset();
+
+self.port.emit("loadFinished");
+
+$('#'+id).checked = true;
+$('#'+id).button("refresh");
