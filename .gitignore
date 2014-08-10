@@ -1,1 +1,5 @@
+<<<<<<< HEAD
+=======
+.idea/
+>>>>>>> 3521e42... implemented jqueryui buttons and refiltering after page-reload
 data/login.js

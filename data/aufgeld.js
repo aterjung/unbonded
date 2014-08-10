@@ -110,15 +110,51 @@ function scrollToFilter(){
     }, 1000);
 }
 
+// React to control messages from main.js
+self.port.on("resetFilter", function() {
+    resetFilter();
+    scrollToFilter();
+});
+
+self.port.on("updateFilter", function(add) {
+    filter(add);
+    scrollToFilter();
+});
+
+self.port.on("setFilterButton", function(id) {
+    $('#'+id).click();
+//    $('#'+id).button("refresh");
+});
+
+// Insert our markup to page
 $('head').append('<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">');
 
 $("<div id=\"enhancer_filter\" class=\"nice_group_border enhanced_filter\"><a id=\"enhancer_filter_button_reset\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-recycle fa-lg\"></i></a></div>").insertBefore(".loansales_table");
+$('<div id="enhancer_filter" class="nice_group_border enhanced_filter">' +
+    '<div id="surchargeFilter">' +
+    '<input type="radio" id="surchargeFilterNo" name="surchargeFilterRadio">' +
+    '<label for="surchargeFilterNo">aus</label>' +
+    '<input type="radio" id="surchargeFilterM5" name="surchargeFilterRadio">' +
+    '<label for="surchargeFilterM5">-5 %</label>' +
+    '<input type="radio" id="surchargeFilter0" name="surchargeFilterRadio">' +
+    '<label for="surchargeFilter0">0 %</label>' +
+    '<input type="radio" id="surchargeFilterP5" name="surchargeFilterRadio">' +
+    '<label for="surchargeFilterP5">5 %</label>' +
+    '</div></div>').insertBefore(".loansales_table");
 
 $("<a id=\"enhancer_sort_a_button\" class=\"enhanced_btn\" href=\"#\"> &darr; Aufgeld </a>").insertAfter("#enhancer_filter_button_reset");
+// React on button events
+$("input[name=surchargeFilterRadio]").change(function(e) {
+    console.log(this.id);
+    self.port.emit("buttonChange", this.id);
+});
 
 $("<a id=\"enhancer_filter_button_m5\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> A &le; -5% </a>").insertAfter("#enhancer_sort_a_button");
+// Apply jQueryUI effects
+$( "#surchargeFilter" ).buttonset();
 
 $("<a id=\"enhancer_filter_button0\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> A &le; 0% </a>").insertAfter("#enhancer_filter_button_m5");
+self.port.emit("loadFinished");
 
 $("<a id=\"enhancer_filter_button_p5\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> A &le; 5% </a>").insertAfter("#enhancer_filter_button0");
 
