@@ -18,15 +18,8 @@ function filter(min) {
             parent = elements[i].parentNode;
 
             $(elements[i]).parent().hide();
-
-            // parent.style = "display:none;";
-
-            //parClass = parent.className;
-            //modClass = parClass + ' hideMe'; parent.className = modClass;
-        }
-        ;
-    }
-    ;
+        };
+    };
 }
 
 function resetFilter() {
@@ -35,36 +28,35 @@ function resetFilter() {
     for (i = 0; i < c; i++) {
         element = elements[i].parentNode.childNodes[21].childNodes[1].childNodes[1];
         $(elements[i]).parent().show();
-    }
-    ;
+    };
 }
 
-function scrollToFilter(){
+function scrollToFilter() {
     $('html, body').animate({
         scrollTop: $("#enhancer_filter").offset().top
     }, 1000);
 }
 
 // React to control messages from main.js
-self.port.on("resetFilter", function() {
+self.port.on("resetFilter", function () {
     resetFilter();
     scrollToFilter();
 });
 
-self.port.on("updateFilter", function(add) {
+self.port.on("updateFilter", function (add) {
     filter(add);
     scrollToFilter();
 });
 
-self.port.on("setFilterButton", function(id) {
-    $('#'+id).click();
-//    $('#'+id).button("refresh");
+self.port.on("setFilterButton", function (id) {
+    $('#' + id).click();
 });
 
 // Insert our markup to page
 $('head').append('<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">');
 
 $('<div id="enhancer_filter" class="nice_group_border enhanced_filter">' +
+    '<span>Auf/Abschläge <i class=\"fa fa-filter fa-lg\"></i></span>'+
     '<div id="surchargeFilter">' +
     '<input type="radio" id="surchargeFilterNo" name="surchargeFilterRadio">' +
     '<label for="surchargeFilterNo">aus</label>' +
@@ -77,15 +69,13 @@ $('<div id="enhancer_filter" class="nice_group_border enhanced_filter">' +
     '</div></div>').insertBefore(".loansales_table");
 
 // React on button events
-$("input[name=surchargeFilterRadio]").change(function(e) {
+$("input[name=surchargeFilterRadio]").change(function (e) {
     console.log(this.id);
     self.port.emit("buttonChange", this.id);
 });
 
 // Apply jQueryUI effects
-$( "#surchargeFilter" ).buttonset();
+$("#surchargeFilter").buttonset();
 
+// Page modification finished, send event back to main.js to update filter status
 self.port.emit("loadFinished");
-
-$('#'+id).checked = true;
-$('#'+id).button("refresh");
