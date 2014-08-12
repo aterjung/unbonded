@@ -114,17 +114,17 @@ $('head').append('<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/f
 
 $("<div id=\"enhancer_filter\" class=\"nice_group_border enhanced_filter\"><a id=\"enhancer_filter_button_reset\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-recycle fa-lg\"></i></a></div>").insertBefore(".loansales_table");
 
-$("<a id=\"enhancer_sort_a_button\" class=\"enhanced_btn\" href=\"#\"> &darr; Aufgeld </a>").insertAfter("#enhancer_filter_button_reset");
+$("<a id=\"enhancer_sort_a_button\" class=\"enhanced_btn\" href=\"#\"> &darr; Markup </a>").insertAfter("#enhancer_filter_button_reset");
 
-$("<a id=\"enhancer_filter_button_m5\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> A &le; -5% </a>").insertAfter("#enhancer_sort_a_button");
+$("<a id=\"enhancer_filter_button_m5\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> M &le; -5% </a>").insertAfter("#enhancer_sort_a_button");
 
-$("<a id=\"enhancer_filter_button0\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> A &le; 0% </a>").insertAfter("#enhancer_filter_button_m5");
+$("<a id=\"enhancer_filter_button0\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> M &le; 0% </a>").insertAfter("#enhancer_filter_button_m5");
 
-$("<a id=\"enhancer_filter_button_p5\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> A &le; 5% </a>").insertAfter("#enhancer_filter_button0");
+$("<a id=\"enhancer_filter_button_p5\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> M &le; 5% </a>").insertAfter("#enhancer_filter_button0");
 
-$("<a id=\"enhancer_filter_button_x\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> A &le; x% </a>").insertAfter("#enhancer_filter_button_p5");
+$("<a id=\"enhancer_filter_button_x\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> M &le; x% </a>").insertAfter("#enhancer_filter_button_p5");
 
-$("<a id=\"enhancer_sort_r_button\" class=\"enhanced_btn\" href=\"#\"> <span class=\"green\"> &uarr; Rendite </a>").insertAfter("#enhancer_filter_button_x");
+$("<a id=\"enhancer_sort_r_button\" class=\"enhanced_btn\" href=\"#\"> <span class=\"green\"> &uarr; Return </a>").insertAfter("#enhancer_filter_button_x");
 
 $("<a id=\"enhancer_filter_button_r20\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> <span class=\"green\">R &ge; 20% </span></a>").insertAfter("#enhancer_sort_r_button");
 
@@ -163,7 +163,7 @@ $("#enhancer_filter_button_p5").click(function () {
     scrollToFilter();
 });
 $("#enhancer_filter_button_x").click(function () {
-	x = prompt('Maximaler Aufschlag in Prozent:','');
+	x = prompt('Maximal markup :','');
     filter(x);
 	sort_r();
     scrollToFilter();
@@ -179,7 +179,7 @@ $("#enhancer_filter_button_r30").click(function () {
     scrollToFilter();
 });
 $("#enhancer_filter_button_rx").click(function () {
-	x = prompt('Minimale Rendite in Prozent:','');
+	x = prompt('Minimal expected return :','');
     r_filter(x);
 	sort_r();
     scrollToFilter();

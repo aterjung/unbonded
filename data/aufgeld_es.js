@@ -114,23 +114,23 @@ $('head').append('<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/f
 
 $("<div id=\"enhancer_filter\" class=\"nice_group_border enhanced_filter\"><a id=\"enhancer_filter_button_reset\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-recycle fa-lg\"></i></a></div>").insertBefore(".loansales_table");
 
-$("<a id=\"enhancer_sort_a_button\" class=\"enhanced_btn\" href=\"#\"> &darr; Aufgeld </a>").insertAfter("#enhancer_filter_button_reset");
+$("<a id=\"enhancer_sort_a_button\" class=\"enhanced_btn\" href=\"#\"> &darr; Recargo </a>").insertAfter("#enhancer_filter_button_reset");
 
-$("<a id=\"enhancer_filter_button_m5\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> A &le; -5% </a>").insertAfter("#enhancer_sort_a_button");
+$("<a id=\"enhancer_filter_button_m5\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> R &le; -5% </a>").insertAfter("#enhancer_sort_a_button");
 
-$("<a id=\"enhancer_filter_button0\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> A &le; 0% </a>").insertAfter("#enhancer_filter_button_m5");
+$("<a id=\"enhancer_filter_button0\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> R &le; 0% </a>").insertAfter("#enhancer_filter_button_m5");
 
-$("<a id=\"enhancer_filter_button_p5\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> A &le; 5% </a>").insertAfter("#enhancer_filter_button0");
+$("<a id=\"enhancer_filter_button_p5\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> R &le; 5% </a>").insertAfter("#enhancer_filter_button0");
 
-$("<a id=\"enhancer_filter_button_x\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> A &le; x% </a>").insertAfter("#enhancer_filter_button_p5");
+$("<a id=\"enhancer_filter_button_x\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> R &le; x% </a>").insertAfter("#enhancer_filter_button_p5");
 
-$("<a id=\"enhancer_sort_r_button\" class=\"enhanced_btn\" href=\"#\"> <span class=\"green\"> &uarr; Rendite </a>").insertAfter("#enhancer_filter_button_x");
+$("<a id=\"enhancer_sort_r_button\" class=\"enhanced_btn\" href=\"#\"> <span class=\"green\"> &uarr; Interes </a>").insertAfter("#enhancer_filter_button_x");
 
-$("<a id=\"enhancer_filter_button_r20\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> <span class=\"green\">R &ge; 20% </span></a>").insertAfter("#enhancer_sort_r_button");
+$("<a id=\"enhancer_filter_button_r20\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> <span class=\"green\">I &ge; 20% </span></a>").insertAfter("#enhancer_sort_r_button");
 
-$("<a id=\"enhancer_filter_button_r30\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> <span class=\"green\">R &ge; 30% </span></a>").insertAfter("#enhancer_filter_button_r20");
+$("<a id=\"enhancer_filter_button_r30\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> <span class=\"green\">I &ge; 30% </span></a>").insertAfter("#enhancer_filter_button_r20");
 
-$("<a id=\"enhancer_filter_button_rx\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> <span class=\"green\">R &ge; x% </span></a>").insertAfter("#enhancer_filter_button_r30");
+$("<a id=\"enhancer_filter_button_rx\" class=\"enhanced_btn\" href=\"#\"><i class=\"fa fa-filter fa-lg\"></i> <span class=\"green\">I &ge; x% </span></a>").insertAfter("#enhancer_filter_button_r30");
 
 
 
@@ -163,7 +163,7 @@ $("#enhancer_filter_button_p5").click(function () {
     scrollToFilter();
 });
 $("#enhancer_filter_button_x").click(function () {
-	x = prompt('Maximaler Aufschlag in Prozent:','');
+	x = prompt('Designa el recargo :','');
     filter(x);
 	sort_r();
     scrollToFilter();
@@ -179,7 +179,7 @@ $("#enhancer_filter_button_r30").click(function () {
     scrollToFilter();
 });
 $("#enhancer_filter_button_rx").click(function () {
-	x = prompt('Minimale Rendite in Prozent:','');
+	x = prompt('Designa el redito :','');
     r_filter(x);
 	sort_r();
     scrollToFilter();
